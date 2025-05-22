@@ -688,7 +688,7 @@ position = 'before'
 match_indent = true
 payload = '''
 --Change Beast wave
-if G.GAME.blind.name == 'bl_reverse_final_beast' and G.GAME.chips - G.GAME.blind.chips >= 0 and (G.GAME.beast_wave ~= 'bl_reverse_final_beast_dummy') then
+if G.GAME.blind.name == 'bl_reverse_final_beast' and to_big(G.GAME.chips) - to_big(G.GAME.blind.chips) >= to_big(0) and (G.GAME.beast_wave ~= 'bl_reverse_final_beast_dummy') then
     local current_blind = 1
     for k, v in pairs(G.GAME.beast_blinds) do
         if v == G.GAME.beast_wave then

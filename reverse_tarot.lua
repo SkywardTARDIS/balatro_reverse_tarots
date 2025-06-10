@@ -221,7 +221,6 @@ function evaluate_poker_hand(hand)
     local omni = {}
     local best_hand = nil
     for i=1, #hand, 1 do
-        words = {}
         if hand[i].ability.name and not hand[i].debuff  then
             if is_omnirank(hand[i]) then
                 table.insert(omni, i)

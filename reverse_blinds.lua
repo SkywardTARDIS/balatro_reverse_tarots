@@ -785,7 +785,7 @@ SMODS.Blind{
             "#3#"
         }
     },
-    dollars = 5,
+    dollars = 8,
     mult = 1.5,
     discovered = false,
     boss = {showdown = true, min = 10, max = 10},

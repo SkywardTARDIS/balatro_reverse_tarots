@@ -1561,6 +1561,59 @@ SMODS.Joker{
     end
 }
 
+--[[SMODS.Joker {
+    key = "ss",
+    loc_txt = {
+        name = "place holder",
+        text = {
+            "This text holds the place",
+        }
+    },
+    config = {},
+    rarity = 3,
+    cost = 8, 
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    calculate = function(self, card, context)
+        if context.reroll_shop then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    -- Reroll packs
+                    local boosterno = math.max(#G.shop_booster.cards, G.GAME.starting_params.boosters_in_shop + (G.GAME.modifiers.extra_boosters or 0) )
+                    for i = #G.shop_booster.cards,1, -1 do
+                        local c = G.shop_booster:remove_card(G.shop_booster.cards[i])
+                        c:remove()
+                        c = nil
+                    end
+                    for i=1, boosterno do
+                        SMODS.add_booster_to_shop()
+                    end
+                    -- Reroll vouchers
+                    local voucherno = math.max(#G.shop_vouchers.cards, G.GAME.starting_params.vouchers_in_shop + (G.GAME.modifiers.extra_vouchers or 0))
+                    for i = #G.shop_vouchers.cards,1, -1 do
+                        local c = G.shop_vouchers:remove_card(G.shop_vouchers.cards[i])
+                        c:remove()
+                        c = nil
+                    end
+                    for i=1, voucherno do
+                        SMODS.add_voucher_to_shop()
+                    end
+                    return true
+                end
+            }))
+            return {
+                message = "hold",
+                card = card,
+                colour = G.C.MONEY
+            }
+        end
+    end
+}
+]]
+
 --[[
 SMODS.Joker{
     key = 'Rekoj',

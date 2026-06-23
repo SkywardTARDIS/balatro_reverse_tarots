@@ -113,6 +113,14 @@ SMODS.Sticker{
     end
 }
 
+to_big = to_big or function(a)
+	return a
+end
+
+to_number = to_number or function(a)
+	return a
+end
+
 function is_rank(card, ranks)
     if SMODS.has_no_rank(card) and not card.vampired then return false end
     if is_omnirank(card) then return true end

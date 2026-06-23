@@ -654,7 +654,7 @@ SMODS.Joker{
             }
         end
         if context.end_of_round and not context.blueprint and context.main_eval then
-            if G.GAME.chips/G.GAME.blind.chips >= 0.5 and G.GAME.chips < G.GAME.blind.chips then
+            if to_big(G.GAME.chips)/to_big(G.GAME.blind.chips) >= to_big(0.5) and to_big(G.GAME.chips) < to_big(G.GAME.blind.chips) then
                 card.ability.extra.lives = card.ability.extra.lives - 1
                 if card.ability.extra.lives <= 0 then
                     G.E_MANAGER:add_event(Event({
@@ -1277,8 +1277,8 @@ SMODS.Joker{
     calculate = function(self,card,context)
         if context.final_scoring_step and G.GAME.current_round.hands_left <= 0 and not context.blueprint then
             card.ability.extra.remaining = card.ability.extra.remaining - 1
-            local full_score = G.GAME.chips + hand_chips * mult
-            if full_score < G.GAME.blind.chips then
+            local full_score = to_big(G.GAME.chips) + to_big(hand_chips) * to_big(mult)
+            if full_score < to_big(G.GAME.blind.chips) then
                 G.E_MANAGER:add_event(Event({ -- flip card
                     trigger = 'after',
                     delay = 0.15,
